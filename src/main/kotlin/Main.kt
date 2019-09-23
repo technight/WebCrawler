@@ -1,18 +1,12 @@
+import crawler.SynchronousCrawler
+import frontier.SimpleFrontier
+import robot.RobotsCrawler
+import store.DiskStore
+
 fun main() {
     val store = DiskStore()
-    val crawler = Crawler(store)
-    crawler.crawl("https://google.com")
-//    val robotParser = RobotsParser("SatomiBot")
-//    val sites = listOf(
-//            "google.com",
-//            "facebook.com",
-//            "hltv.org",
-//            "pornhub.com",
-//            "reddit.com",
-//            "wikipedia.com",
-//            "studydojo.ninja"
-//        ).asSequence()
-//    sites.map {
-//        it to robotParser.parse(crawler.getRobot(it).split("\n"))
-//    }.forEach(::println)
+    val robotsCrawler = RobotsCrawler("SatomiBot")
+    val frontier = SimpleFrontier()
+    val crawler = SynchronousCrawler(store, robotsCrawler, frontier)
+    crawler.crawl("https://webassembly.org/")
 }
