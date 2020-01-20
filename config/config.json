@@ -1,0 +1,7 @@
+{
+  "seedURL": "https://learnxinyminutes.com",
+  "pagesToCrawl": 1000,
+  "HTMLStorePath": "html_pages",
+  "ConnectionString": "mongodb+srv://HCLSEXY:HCLSEXY12345678@cluster0-gdqtr.azure.mongodb.net/test?retryWrites=true&w=majority",
+  "TimesToParse": 100
+}

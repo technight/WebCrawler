@@ -1,5 +1,8 @@
 package store
 
+import java.net.URL
+
 interface Store {
-    fun storeHtml(html: String, url: String)
+    fun storeHtml(htmlDTO: HtmlDTO)
+    fun storePdf(pdf: URL)
 }

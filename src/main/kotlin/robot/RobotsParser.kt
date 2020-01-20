@@ -1,5 +1,7 @@
 package robot
 
+import kotlin.math.roundToInt
+
 class RobotsParser(botName: String) {
     private val userAgents = setOf(botName, "*")
     private val String.isUserAgent get() = toLowerCase().startsWith("user-agent:")
@@ -7,7 +9,7 @@ class RobotsParser(botName: String) {
     private val String.isCrawlDelay get() = toLowerCase().startsWith("crawl-delay:")
     private val String.userAgent get() = toLowerCase().replace("user-agent: ", "")
     private val String.disallowRule get() = toLowerCase().replace("disallow: ", "")
-    private val String.crawlDelayRule get() = toLowerCase().replace("crawl-delay: ", "").toInt()
+    private val String.crawlDelayRule get() = toLowerCase().replace("crawl-delay: ", "").toDouble().roundToInt()
 
     private fun parseRules(lines: List<String>): Set<RobotRule> {
         val line = lines.firstOrNull() ?: return emptySet()

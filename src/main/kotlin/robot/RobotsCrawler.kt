@@ -37,8 +37,11 @@ class RobotsCrawler(botName: String) {
 
     private fun robotDecisionFromRule(url: String, rules: Set<RobotRule>): RobotDecision {
         if (rules.all { it is RobotRule.Delay || (it is RobotRule.Disallow && !url.contains(it.path)) }) {
-            val delay = rules.find { it is RobotRule.Delay }
-            return delay?.let { RobotDecision.CrawlDelayed((it as RobotRule.Delay).delay) } ?: RobotDecision.CanCrawl
+            val delay = rules.find { it is RobotRule.Delay } as? RobotRule.Delay ?: return RobotDecision.CanCrawl
+            if (delay.delay > 10) {
+                return RobotDecision.NoCrawl
+            }
+            return RobotDecision.CrawlDelayed(delay.delay)
         }
         return RobotDecision.NoCrawl
     }
